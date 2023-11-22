@@ -5,7 +5,7 @@
 
 + 개발기간 : 23.10.31 - 23.12.08
 + 배포주소 : (배포기간 00.00.00 ~ 00.00.00)
-+ <img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" width="20" height="20"><a href="https://github.com/yun-setenforce/Calejoin_BE">BE Git</a> / <img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" width="20" height="20"><a href="https://github.com/yun-setenforce/Calejoin_FE">FE Git</a>
++ <img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" width="20" height="20"><a href="https://github.com/Lks1102/Calejoin_BE">BE Git</a> / <img src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" width="20" height="20"><a href="https://github.com/Lks1102/Calejoin_FE">FE Git</a>
 + 📕 <a href="https://www.notion.so/chhak0503/3-79b60ae38e8c46fd999ea763071188ae">팀 노션</a>
 
 
