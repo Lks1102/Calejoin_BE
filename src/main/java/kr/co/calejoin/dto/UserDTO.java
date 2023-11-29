@@ -1,9 +1,6 @@
 package kr.co.calejoin.dto;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import lombok.*;
 
 import jakarta.persistence.*;
 import java.sql.Date;
@@ -16,12 +13,16 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @Data
 @Builder
+@ToString
 public class UserDTO {
 
        private String uid;
+       private String pass;
        private String name;
-       private String email;
        private String nick;
+       private String hp;
+       private int age;
+       private String email;
        private String accessToken;
        private String type;
        private long badCnt;

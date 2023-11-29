@@ -24,7 +24,10 @@ public class UserEntity {
        private String uid;
        private String name;
        private String email;
+       private String pass;
        private String nick;
+       private String hp;
+       private int age;
        private String accessToken;
        private String type;
        private long badCnt;
