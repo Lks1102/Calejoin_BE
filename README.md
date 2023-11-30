@@ -29,12 +29,11 @@ Git, Github, Slack, Notion, XD
 
 
 # 👥 Team
-👽 정채윤 <a href="https://github.com/yun-setenforce">yun-setenforce</a>
+
+👾 정영재 <a href="https://github.com/pdillona">pdillona</a>
 
 🎃 김무현 <a href="https://github.com/moo-hyun">moo-hyun</a>
 
 🐰 노수현 <a href="https://github.com/z82714567">z82714567</a>
 
 ⛄ 이규석 <a href="https://github.com/Lks1102">Lks1102</a>
-
-👾 정영재 <a href="https://github.com/pdillona">pdillona</a>
