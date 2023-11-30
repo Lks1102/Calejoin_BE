@@ -9,6 +9,8 @@ import java.util.Map;
 public interface UserMapper {
 
     public void  insertUser(UserDTO user);
+    
+    public int selectUser(UserDTO user);
 
 }
 

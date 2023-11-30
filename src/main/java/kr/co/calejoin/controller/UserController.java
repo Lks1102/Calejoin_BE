@@ -77,5 +77,33 @@ public class UserController {
         log.info("User registered");
     }
 
+    @PostMapping("/user/login")
+    public int login(@RequestBody Map<String,String> user){
 
+        log.info("11111111");
+        String uid = (String) user.get("uid");
+        log.info(uid);
+        String pass = (String) user.get("pass");
+        log.info(pass);
+        String name = (String) user.get("name");
+
+        UserDTO dto = new UserDTO();
+
+        log.info("2222222222");
+
+        dto.setUid(uid);
+        dto.setPass(pass);
+
+        log.info("333333333333+ dto: " + dto.toString());
+        log.info("333333333333+ dto: " + dto);
+
+
+        int result = mapper.selectUser(dto);
+
+        if(result == 1){
+            return result ;
+        }else {
+            return 0;
+        }
+    }
 }
