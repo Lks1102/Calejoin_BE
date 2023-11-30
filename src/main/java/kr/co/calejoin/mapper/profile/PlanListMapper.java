@@ -8,9 +8,9 @@ import java.util.List;
 
 @Mapper
 public interface PlanListMapper {
-    public List<CalendarDTO> selectCalendar();
+    public List<CalendarDTO> selectCalendar(String uid);
 
-    public List<CategoryDTO> selectCategory();
+    public List<CategoryDTO> selectCategory(String uid);
 
     public void insertPlan (CalendarDTO dto);
 

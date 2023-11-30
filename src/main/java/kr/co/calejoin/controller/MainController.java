@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
@@ -23,16 +24,16 @@ public class MainController {
     private MainService mainService;
 
 
-    @GetMapping("/")
+    @GetMapping("/{uid}")
     @ResponseBody
-    public Map<String, Object> home() {
+    public Map<String, Object> home(@PathVariable() String uid) {
         log.info("home...1");
 
         // Plan List
-        List<CalendarDTO> planList = mainService.selectCalendar();
+        List<CalendarDTO> planList = mainService.selectCalendar(uid);
 
         // Category List
-        List<CategoryDTO> categoryList = mainService.selectCategory();
+        List<CategoryDTO> categoryList = mainService.selectCategory(uid);
 
         log.info("home...2");
 
