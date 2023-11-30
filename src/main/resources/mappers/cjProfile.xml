@@ -5,14 +5,14 @@
 <mapper namespace="kr.co.calejoin.mapper.profile.PlanListMapper">
 
     <select id="selectCalendar" resultType="kr.co.calejoin.dto.CalendarDTO">
-        SELECT * FROM `calendar`
+        SELECT * FROM `calendar` WHERE `uid`=#{uid}
     </select>
     <select id="selectCategory" resultType="kr.co.calejoin.dto.CategoryDTO">
-        SELECT * FROM `category`
+        SELECT * FROM `category` WHERE `uid`=#{uid}
     </select>
 
     <insert id="insertPlan">
-        INSERT INTO `calendar` (uid,cateNo,title,startTime,endTime,memo,regDate) VALUES(#{uid},#{cateNo},#{title},#{startTime},#{endTime},#{memo},#{regDate})
+        INSERT INTO `calendar` (uid,cateNo,title,startTime,endTime,memo,isPublic,regDate) VALUES(#{uid},#{cateNo},#{title},#{startTime},#{endTime},#{memo},#{isPublic},#{regDate})
     </insert>
 
     <delete id="deletePlan">

@@ -20,8 +20,8 @@ public class PlanWriteService {
     private final CategoryMapper categoryMapper;
 
 
-    public List<CategoryDTO> selectCategory(){
-        return categoryMapper.selectCategory();
+    public List<CategoryDTO> selectCategory(String uid){
+        return categoryMapper.selectCategory(uid);
     }
 
     public void insertPlan(CalendarDTO dto) {
