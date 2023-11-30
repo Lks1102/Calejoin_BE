@@ -16,10 +16,10 @@ public class MainService {
 
     private final PlanListMapper planListMapper;
 
-    public List<CalendarDTO> selectCalendar( ){
-        return planListMapper.selectCalendar();
+    public List<CalendarDTO> selectCalendar(String uid){
+        return planListMapper.selectCalendar(uid);
     }
-    public List<CategoryDTO> selectCategory(){
-        return planListMapper.selectCategory();
+    public List<CategoryDTO> selectCategory(String uid){
+        return planListMapper.selectCategory(uid);
     }
 }

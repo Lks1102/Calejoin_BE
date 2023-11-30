@@ -23,11 +23,11 @@ public class PlanWriteController {
     @Autowired
     private PlanWriteService planWriteService;
 
-    @GetMapping("/PlanWrite")
+    @GetMapping("/PlanWrite/{uid}")
     @ResponseBody
-    public List<CategoryDTO> category () {
+    public List<CategoryDTO> category (@PathVariable String uid) {
 
-        List<CategoryDTO> categoryList = planWriteService.selectCategory();
+        List<CategoryDTO> categoryList = planWriteService.selectCategory(uid);
 
         return categoryList;
     };
@@ -48,6 +48,8 @@ public class PlanWriteController {
         log.info(endTimeStr);
         String memo = (String) requestData.get("memo");
         log.info(memo);
+        String isPublic = (String) requestData.get("isPublic");
+        log.info(isPublic);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
@@ -64,9 +66,10 @@ public class PlanWriteController {
         dto.setStartTime(startTime);
         dto.setEndTime(endTime);
         dto.setMemo(memo);
+        dto.setIsPublic(Integer.parseInt(isPublic));
         dto.setRegDate(LocalDateTime.now());
 
-        log.info(dto);
+        log.info("plan------"+dto);
         planWriteService.insertPlan(dto);
         return "insertPlan";
     };
@@ -92,6 +95,9 @@ public class PlanWriteController {
         log.info(endTimeStr);
         String memo = (String) requestData.get("memo");
         log.info(memo);
+        String isPublic = (String) requestData.get("isPublic");
+        log.info(isPublic);
+
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
@@ -108,6 +114,8 @@ public class PlanWriteController {
         dto.setStartTime(startTime);
         dto.setEndTime(endTime);
         dto.setMemo(memo);
+        dto.setIsPublic(Integer.parseInt(isPublic));
+
         dto.setRegDate(LocalDateTime.now());
 
         log.info(dto);

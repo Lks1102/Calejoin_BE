@@ -26,7 +26,7 @@ public class CalendarDTO {
        private LocalDateTime startTime;
        private LocalDateTime endTime;
        private String memo;
-       private long isPublic;
+       private int isPublic;
        private long isNotification;
        private LocalDate notiDate;
        private long hasMemory;
