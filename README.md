@@ -37,3 +37,7 @@ Git, Github, Slack, Notion, XD
 🐰 노수현 <a href="https://github.com/z82714567">z82714567</a>
 
 ⛄ 이규석 <a href="https://github.com/Lks1102">Lks1102</a>
+
+-----
+Security 오류 해결
+https://velog.io/@crow/%EC%8A%A4%ED%94%84%EB%A7%81-%EB%B6%80%ED%8A%B8-security
