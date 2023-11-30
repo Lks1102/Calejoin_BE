@@ -15,5 +15,8 @@
               regDate = #{regDate}
     </insert>
     
+    <select id="selectUser" resultType="integer">
+        SELECT COUNT(*) FROM user WHERE `uid` = #{uid} AND `pass` = #{pass}     
+    </select>
 
 </mapper>
