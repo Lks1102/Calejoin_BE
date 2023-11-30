@@ -8,6 +8,7 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
+@EnableWebSecurity
 @Log4j2
 @Configuration
 public class SecurityConfiguration implements WebMvcConfigurer {
@@ -40,10 +42,11 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 						.requestMatchers("/**").permitAll()
 						.requestMatchers("/").permitAll()
 						.requestMatchers("/css/**", "/js/**", "/images/**", "/file/**", "/thumbs/**", "/banners/**").permitAll()
+						
 						)
 				// 로그인 설정
 				.formLogin( formLogin -> formLogin
-						.loginPage("http://localhost:3000/login")
+						.loginPage("/")
 				);
 		
 		return http.build();

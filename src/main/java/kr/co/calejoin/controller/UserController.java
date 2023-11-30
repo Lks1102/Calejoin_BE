@@ -78,6 +78,7 @@ public class UserController {
     }
 
     @PostMapping("/user/login")
+    @ResponseBody
     public int login(@RequestBody Map<String,String> user){
 
         log.info("11111111");
@@ -85,7 +86,7 @@ public class UserController {
         log.info(uid);
         String pass = (String) user.get("pass");
         log.info(pass);
-        String name = (String) user.get("name");
+        
 
         UserDTO dto = new UserDTO();
 
@@ -100,10 +101,21 @@ public class UserController {
 
         int result = mapper.selectUser(dto);
 
+        log.info("result~~~~~~~~~~~: " + result);
+        
+        
+        
+        
+        
+        
+        
         if(result == 1){
+            
+            
+            
             return result ;
         }else {
-            return 0;
+            return result;
         }
     }
 }
