@@ -1,6 +1,7 @@
 package kr.co.calejoin.config;
 
-import lombok.extern.log4j.Log4j2;
+import kr.co.calejoin.jwt.JwtAuthenticationFilter;
+import kr.co.calejoin.jwt.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,27 +9,29 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
+import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 
-@EnableWebSecurity
-@Log4j2
+
 @Configuration
-public class SecurityConfiguration implements WebMvcConfigurer {
-
+public class SecurityConfiguration {
 
 	@Autowired
 	private SecurityUserSerivce service;
 
-	//기술노트 [Spring] 정적 자원 리소스 경로설정
 	@Autowired
-	private ResourceLoader resourceLoader;
+	private JwtProvider jwtProvider;
+
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -36,19 +39,23 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 		http
 				// 사이트 위변조 방지 비활성
 				.csrf(CsrfConfigurer::disable) // 메서드 참조 연산자로 람다식을 간결하게 표현
-
+				// 기본 HTTP 인증방식 비활성
+				.httpBasic(HttpBasicConfigurer::disable)
+				// 토큰방식으로 로그인 처리하기 때문에 폼방식 비활성
+				.formLogin(FormLoginConfigurer::disable)
+				// 토큰기반 인증 방식이기 때문에 세션을 사용안함
+				.sessionManagement(config -> config.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				// CORS 필터(토큰 검사 필터 보다 앞에 추가)
+				.addFilter(corsFilter())
+				// 토큰 검사 필터 설정
+				.addFilterBefore(new JwtAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
 				// 인가 권한 설정
 				.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-						.requestMatchers("/**").permitAll()
-						.requestMatchers("/").permitAll()
-						.requestMatchers("/css/**", "/js/**", "/images/**", "/file/**", "/thumbs/**", "/banners/**").permitAll()
-						
-						)
-				// 로그인 설정
-				.formLogin( formLogin -> formLogin
-						.loginPage("/")
-				);
-		
+						.requestMatchers("/admin/**").hasAuthority("ADMIN")
+						.requestMatchers("/manager/**").hasAnyAuthority("ADMIN", "MANAGER")
+						.requestMatchers("/user/**").permitAll()
+						.anyRequest().permitAll());
+
 		return http.build();
 	}
 
@@ -61,18 +68,20 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
 		return config.getAuthenticationManager();
 	}
-
-
-	//기술노트 [Spring] 정적 자원 리소스 경로설정
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/files/**")
-				.addResourceLocations(resourceLoader.getResource("file:file/"));
-		registry.addResourceHandler("/thumbs/**")
-				.addResourceLocations(resourceLoader.getResource("file:thumbs/"));
-		registry.addResourceHandler("/banners/**")
-				.addResourceLocations(resourceLoader.getResource("file:banners/"));
+	// Spring Security에서 CORS 해제 필터
+	@Bean
+	public CorsFilter corsFilter() {
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		CorsConfiguration config = new CorsConfiguration();
+		config.addAllowedOrigin("http://localhost:5173"); // <-- 반드시 허용 도메인 주소를 작성, *(전체) 허용하면 안됨 
+		config.addAllowedMethod("*");
+		config.addAllowedHeader("*");
+		config.setAllowCredentials(true);
+		source.registerCorsConfiguration("/**", config);
+		return new CorsFilter(source);
 	}
+
+
 
 
 }

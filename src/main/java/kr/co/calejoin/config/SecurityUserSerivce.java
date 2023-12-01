@@ -1,5 +1,3 @@
-
-
 package kr.co.calejoin.config;
 
 import kr.co.calejoin.entity.UserEntity;
