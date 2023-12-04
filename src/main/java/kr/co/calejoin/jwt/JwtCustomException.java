@@ -1,3 +1,4 @@
+/*
 package kr.co.calejoin.jwt;
 
 import java.io.IOException;
@@ -38,4 +39,4 @@ public class JwtCustomException extends RuntimeException {
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.getWriter().print(error.getMessage());
     }
-}
+}*/

@@ -42,7 +42,8 @@ public class UserController {
         log.info(name);
         String hp = (String) user.get("hp");
         log.info(hp);
-        int age = (int) user.get("age");
+        String intValue = (String) user.get("age");
+        int age = Integer.parseInt(intValue);
         log.info(age);
         String email = (String) user.get("email");
         log.info("email:  "+email);
