@@ -20,7 +20,7 @@ public class UserController {
     private final UserMapper mapper;
 
     
-    @GetMapping(value = {"/","/index"})
+    @GetMapping(value = {"/","/index"}) 
     public String index(){
         
         return "http://localhost:3000/"; 
