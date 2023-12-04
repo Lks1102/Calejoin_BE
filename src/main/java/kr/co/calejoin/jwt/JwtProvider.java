@@ -1,3 +1,4 @@
+/*
 package kr.co.calejoin.jwt;
 
 import java.time.Duration;
@@ -32,11 +33,13 @@ import lombok.extern.log4j.Log4j2;
 @Getter
 @Component
 public class JwtProvider {
-    /*
+    */
+/*
      * 반드시 jjwt 라이브러리를 0.11.5 버전으로 할것
      * 최신버전 0.12.x(심지어 2023년 10월 5일 등록됨) 로 하면 안됨!
      * (메서드가 바뀌고 상당히 많은 내용이 Deprecated 됨)
-     */
+     *//*
+
     private String issuer;
     private SecretKey secretKey;
 
@@ -127,4 +130,4 @@ public class JwtProvider {
                 .getBody();
     }
 
-}
+}*/

@@ -9,7 +9,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         
-        registry.addMapping("/api/**")
+        registry.addMapping("/**")
 
                 .allowedOrigins("http://localhost:3000", "http://calejoin.site/","http://localhost:8080")
                 .allowedOrigins("http://localhost:3000", "http://localhost:8080")
@@ -17,7 +17,6 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedMethods("*")
                 .allowedHeaders("Authorization", "Content-Type")
                 .exposedHeaders("Custom-Header")
-                .allowCredentials(true)
                 .maxAge(3600);
     }
 }

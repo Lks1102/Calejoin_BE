@@ -1,3 +1,4 @@
+/*
 
 
 package kr.co.calejoin.config;
@@ -15,24 +16,24 @@ import org.springframework.stereotype.Service;
 @Log4j2
 public class SecurityUserSerivce implements UserDetailsService {
 
-	@Autowired
-	private UserRepository repo;
+    @Autowired
+    private UserRepository repo;
 
-	@Override
-	public UserDetails loadUserByUsername(String username) {
-	
-		UserEntity user = repo.findById(username).orElse(null);
+    @Override
+    public UserDetails loadUserByUsername(String username) {
 
-		if(user == null) {
-			throw new UsernameNotFoundException("not found username : " + username);
-		}
+        UserEntity user = repo.findById(username).orElse(null);
 
-		UserDetails userDetails = MyUserDetails.builder()
-				.user(user)
-				.build();
+        if(user == null) {
+            throw new UsernameNotFoundException("not found username : " + username);
+        }
 
-		log.info("UserDetailsService : "+userDetails);
-		return userDetails;
-	}
+        UserDetails userDetails = MyUserDetails.builder()
+                .user(user)
+                .build();
 
-}
+        log.info("UserDetailsService : "+userDetails);
+        return userDetails;
+    }
+
+}*/

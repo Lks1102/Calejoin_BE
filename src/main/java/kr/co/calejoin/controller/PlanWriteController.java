@@ -17,7 +17,7 @@ import java.util.Map;
 
 @Controller
 @Log4j2
-@CrossOrigin("*")
+@CrossOrigin("/*")
 public class PlanWriteController {
 
     @Autowired

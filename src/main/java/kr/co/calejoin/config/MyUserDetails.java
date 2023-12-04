@@ -17,55 +17,65 @@ import java.util.List;
 @Builder
 @ToString
 public class MyUserDetails implements UserDetails {
-	private static final long serialVersionUID = 5232680704133363159L;
+    private static final long serialVersionUID = 5232680704133363159L;
 
-	@Setter
-	private UserEntity user;
+    @Setter
+    private UserEntity user;
 
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		
-		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // 계정이 갖는 권한 목록
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getType()));
+        return authorities;
+    }
 
-		// 반드시 접두어로 ROLE_ 입력해야 됨 그래야 hasRole(), hasAnyRole() 메서드가 처리됨 
-		// 만약 ROLE_ 접두어를 안쓰면 hasAuthority(), hasAnyAuthority() 메서드로 해야됨
-		authorities.add(new SimpleGrantedAuthority("ROLE_"+user.getType()));
-		
-		return authorities;
-	}
+    @Override
+    public String getPassword() {
+        // 계정이 갖는 비밀번호
+        return user.getPass();
+    }
 
-	@Override
-	public String getPassword() {
-		return user.getPass();
-	}
+    @Override
+    public String getUsername() {
+        // 계정이 갖는 아이디
+        return user.getUid();
+    }
 
-	@Override
-	public String getUsername() {
-		return user.getUid();
-	}
+    @Override
+    public boolean isAccountNonExpired() {
+        /* 계정 만료 여부
+         * 	- true : 만료 안됨
+         * 	- false : 만료 (만료 되면 해당 계정으로 로그인 안됨)
+         */
+        return true;
+    }
 
-	@Override
-	public boolean isAccountNonExpired() {
-		// 계정 만료 여부(true:만료안됨, false:만료)
-		return true;
-	}
+    @Override
+    public boolean isAccountNonLocked() {
+        /* 계정 잠김 여부 (휴면 계정을 말하는듯)
+         *  - true : 잠김 안됨
+         *  - false : 잠김
+         */
+        return true;
+    }
 
-	@Override
-	public boolean isAccountNonLocked() {
-		// 계정 잠김 여부(true:잠김안됨, false:잠김)
-		return true;
-	}
+    @Override
+    public boolean isCredentialsNonExpired() {
+        /* 계정 비밀번호 만료 여부
+         *  - true : 만료 안됨
+         *  - false : 잠김
+         */
+        return true;
+    }
 
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// 계정 비밀번호 만료 여부(true:만료안됨, false:잠김)
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		// 계정 활성화 여부(true:활성화, false:비활성화)
-		return true;
-	}
+    @Override
+    public boolean isEnabled() {
+        /* 계정 활성화 여부 - isAccountNonLocked랑 비슷한데 다르데
+         *  - true : 활성화
+         *  - false : 비활성화
+         */
+        return true;
+    }
 }

@@ -23,8 +23,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class SecurityConfiguration implements WebMvcConfigurer {
 
 
-	@Autowired
-	private SecurityUserSerivce service;
+	/*@Autowired
+	private SecurityUserSerivce service;*/
 
 	//기술노트 [Spring] 정적 자원 리소스 경로설정
 	@Autowired
@@ -42,13 +42,13 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 						.requestMatchers("/**").permitAll()
 						.requestMatchers("/").permitAll()
 						.requestMatchers("/css/**", "/js/**", "/images/**", "/file/**", "/thumbs/**", "/banners/**").permitAll()
-						
-						)
+
+				)
 				// 로그인 설정
 				.formLogin( formLogin -> formLogin
 						.loginPage("/")
 				);
-		
+
 		return http.build();
 	}
 
